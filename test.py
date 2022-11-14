@@ -4,6 +4,7 @@ Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses
 """
 
 import os
+import torch
 from collections import OrderedDict
 
 import data
@@ -32,8 +33,11 @@ webpage = html.HTML(web_dir,
 for i, data_i in enumerate(dataloader):
     if i * opt.batchSize >= opt.how_many:
         break
-
-    generated = model(data_i, mode='inference')
+    
+    with torch.no_grad():
+        input_semantics, real_image = model.preprocess_input(data_i)
+        generated = model.netG(input_semantics, z=None)
+        #generated = model(data_i, mode='inference')
 
     img_path = data_i['path']
     for b in range(generated.shape[0]):

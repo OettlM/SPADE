@@ -1,0 +1,55 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Aktuelle Datei",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Train",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            "console": "integratedTerminal",
+            "args": [
+                     "--dataset_mode=custom",
+                     "--label_dir=D:/HER2/data/patched/train/label",
+                     "--image_dir=D:/HER2/data/patched/train/img",
+                     "--no_instance",
+                     "--load_size=512",
+                     "--crop_size=512",
+                     "--label_nc=2",
+                     "--display_winsize=512"
+                    ],
+            "justMyCode": false
+        },
+        {
+            "name": "Predict",
+            "type": "python",
+            "request": "launch",
+            "program": "test.py",
+            "console": "integratedTerminal",
+            "args": [
+                     "--dataset_mode=custom",
+                     "--label_dir=D:/HER2/data/patched_her2/train/label_syn",
+                     "--image_dir=D:/HER2/data/patched_her2/train/img_syn",
+                     "--no_instance",
+                     "--load_size=512",
+                     "--crop_size=512",
+                     "--label_nc=6",
+                     "--display_winsize=512",
+                     "--gpu_ids=0",
+                     "--use_vae",
+                     "--name=HER2_vae",
+                     "--batchSize=1"
+                    ],
+            "justMyCode": false
+        }
+    ]
+}
